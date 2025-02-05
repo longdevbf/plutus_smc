@@ -1,0 +1,127 @@
+{
+    "preamble": {
+      "title": "long/vesting",
+      "description": "Aiken contracts for project 'long/vesting'",
+      "version": "0.0.0",
+      "plutusVersion": "v3",
+      "compiler": {
+        "name": "Aiken",
+        "version": "v1.1.0+be31a7c"
+      },
+      "license": "Apache-2.0"
+    },
+    "validators": [
+      {
+        "title": "vesting.vesting.spend",
+        "datum": {
+          "title": "datum_opt",
+          "schema": {
+            "$ref": "#/definitions/vesting~1Datum"
+          }
+        },
+        "redeemer": {
+          "title": "redeemer",
+          "schema": {
+            "$ref": "#/definitions/Void"
+          }
+        },
+        "compiledCode": "59015801010032323232323225333002323232323253330073370e900118041baa001132323232533300b3370e900018061baa002132323232533300f330013758600460226ea8030dd7180198089baa00414a22a66601e660026eb0c008c044dd50061bae30133014301137540082664464a66602466e1d200230133754002266e20dd6980b180a1baa00100214a0600a60266ea8c014c04cdd50011809980a180a180a180a180a180a180a18089baa00c375a60266028602860226ea801052811191980080080191299980a8008a5013253330133371e6eb8c05c008010528899801801800980b800918091809980998099809980998099809980980091808800980798069baa00216533300a3370e900018059baa0051533300d300c375400a2930b0b18069807001180600098049baa00116300a300b0023009001300900230070013004375400229309b2b2b9a5573aaae7955cfaba157441",
+        "hash": "82af529ae9e06df790a599a53713cd1d848b71d04436574eaa70b4c2"
+      },
+      {
+        "title": "vesting.vesting.else",
+        "compiledCode": "59015801010032323232323225333002323232323253330073370e900118041baa001132323232533300b3370e900018061baa002132323232533300f330013758600460226ea8030dd7180198089baa00414a22a66601e660026eb0c008c044dd50061bae30133014301137540082664464a66602466e1d200230133754002266e20dd6980b180a1baa00100214a0600a60266ea8c014c04cdd50011809980a180a180a180a180a180a180a18089baa00c375a60266028602860226ea801052811191980080080191299980a8008a5013253330133371e6eb8c05c008010528899801801800980b800918091809980998099809980998099809980980091808800980798069baa00216533300a3370e900018059baa0051533300d300c375400a2930b0b18069807001180600098049baa00116300a300b0023009001300900230070013004375400229309b2b2b9a5573aaae7955cfaba157441",
+        "hash": "82af529ae9e06df790a599a53713cd1d848b71d04436574eaa70b4c2"
+      }
+    ],
+    "definitions": {
+      "AssetName": {
+        "title": "AssetName",
+        "dataType": "bytes"
+      },
+      "ByteArray": {
+        "dataType": "bytes"
+      },
+      "Int": {
+        "dataType": "integer"
+      },
+      "PolicyId": {
+        "title": "PolicyId",
+        "dataType": "bytes"
+      },
+      "VerificationKeyHash": {
+        "title": "VerificationKeyHash",
+        "dataType": "bytes"
+      },
+      "Void": {
+        "title": "Unit",
+        "anyOf": [
+          {
+            "dataType": "constructor",
+            "index": 0,
+            "fields": []
+          }
+        ]
+      },
+      "vesting/Asset": {
+        "title": "Asset",
+        "anyOf": [
+          {
+            "title": "Asset",
+            "dataType": "constructor",
+            "index": 0,
+            "fields": [
+              {
+                "title": "policy_id",
+                "$ref": "#/definitions/PolicyId"
+              },
+              {
+                "title": "token_name",
+                "$ref": "#/definitions/AssetName"
+              },
+              {
+                "title": "amt",
+                "$ref": "#/definitions/Int"
+              }
+            ]
+          }
+        ]
+      },
+      "vesting/Datum": {
+        "title": "Datum",
+        "anyOf": [
+          {
+            "title": "Datum",
+            "dataType": "constructor",
+            "index": 0,
+            "fields": [
+              {
+                "title": "owner",
+                "$ref": "#/definitions/VerificationKeyHash"
+              },
+              {
+                "title": "beneficiary",
+                "$ref": "#/definitions/VerificationKeyHash"
+              },
+              {
+                "title": "lock_until",
+                "$ref": "#/definitions/Int"
+              },
+              {
+                "title": "message",
+                "$ref": "#/definitions/ByteArray"
+              },
+              {
+                "title": "nft",
+                "$ref": "#/definitions/vesting~1Asset"
+              },
+              {
+                "title": "locked_ada",
+                "$ref": "#/definitions/Int"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
