@@ -11,6 +11,7 @@ import {
     UTxO,
     Constr,
     datumJsonToCbor,
+    utxoToCore,
 } from "https://deno.land/x/lucid@0.10.11/mod.ts";
    
    import * as cbor from "https://deno.land/x/cbor@v1.4.1/index.js";
@@ -42,13 +43,14 @@ const Asset = Data.Object({
     owner: Data.Bytes(),           
     beneficiary: Data.Bytes(),     // VerificationKeyHash
     lock_until: Data.Integer(),     // Int
-    message: Data.Bytes(),         // ByteArray
-    nft: Asset,                  // Asset type defined above
+    message: Data.Bytes(),
+    nft: Asset,         // ByteArray              // Asset type defined above
     locked_ada: Data.Integer(),     // Int       
  });
 console.log("50");
  
  type Datum = Data.Static<typeof Datum>;
+ 
  async function unlock(utxos: UTxO[], currentTime: number, {from, using} : {from: SpendingValidator, using: Redeemer}): Promise<TxHash>{
     const laterTime = new Date(currentTime + 2 * 60 * 60 * 1000).getTime();
 
@@ -76,6 +78,7 @@ console.log("50");
     console.log("78");
     const utxos = scriptUTxOs.filter((utxo)=> {
         try {
+            console.log("raw datum from utxo : ", utxo.datum);
             const datum = Data.from<Datum>(utxo.datum ?? '', Datum);
             console.log("82");
             console.log("Checking UTxO with datum:", datum);
@@ -116,5 +119,5 @@ console.log("50");
 
  }
  main();
- //deno run --allow-net --allow-read --allow-env unlock.ts 9373d029cbc4ef72769569491590cefc569d7941f6f214b53fed4dc3d51193af
+ //deno run --allow-net --allow-read --allow-env unlock.ts 53afda5cb940a251f24011193b14be448ad06d13dcb2a40cf5df179f2d427dfa
  
